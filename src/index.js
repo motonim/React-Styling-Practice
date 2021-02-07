@@ -9,37 +9,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const gMorning = "Good morning";
-const gAfternoon = "Good afternoon";
-const gEvening = "Good evening";
-const colorRed = {
-  color: "red"
-};
-const colorBlue = {
-  color: "blue"
-};
-const colorGreen = {
-  color: "green"
+const date = new Date();
+const currentTime = date.getHours();
+const customStyle = {
+  color: ""
 };
 
-const today = new Date();
-const currentTime = today.getHours();
+let greeting;
 
-if (0 < currentTime < 12) {
-  ReactDOM.render(
-    <h1 style={colorRed}>{gMorning}</h1>,
-    document.getElementById("root")
-  );
+if (currentTime < 12) {
+  greeting = "Good Morning";
+  customStyle.color = "red";
+} else if (currentTime < 18) {
+  greeting = "Good Afternoon";
+  customStyle.color = "green";
+} else {
+  greeting = "Good Evening";
+  customStyle.color = "blue";
 }
-if (12 < currentTime < 18) {
-  ReactDOM.render(
-    <h1 style={colorGreen}>{gAfternoon}</h1>,
-    document.getElementById("root")
-  );
-}
-if (18 < currentTime < 24) {
-  ReactDOM.render(
-    <h1 style={colorBlue}>{gEvening}</h1>,
-    document.getElementById("root")
-  );
-}
+
+ReactDOM.render(
+  <h1 className="heading" style={customStyle}>
+    {greeting}
+  </h1>,
+  document.getElementById("root")
+);
